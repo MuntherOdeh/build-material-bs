@@ -251,7 +251,7 @@ export default function CartPage() {
                 <div className="flex items-center gap-2 py-2 px-3 bg-green-50 rounded-xl">
                   <Truck className="w-4 h-4 text-green-600" />
                   <span className="text-xs text-green-700 font-medium">
-                    {isRTL ? 'التوصيل مجاني للطلبات فوق ₪500' : 'Free shipping on orders over ₪500'}
+                    {isRTL ? 'التوصيل مجاني للطلبات فوق 500 د.إ' : 'Free shipping on orders over AED 500'}
                   </span>
                 </div>
 

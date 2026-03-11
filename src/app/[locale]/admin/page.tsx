@@ -66,7 +66,7 @@ const recentOrders: RecentOrder[] = [
 const topProducts: TopProduct[] = [
   { id: '1', name: 'Portland Cement 50kg', nameAr: 'إسمنت بورتلاندي 50 كيلو', image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=100&q=80', sold: 1240, revenue: 29760 },
   { id: '2', name: 'Steel Rebar 12mm', nameAr: 'حديد تسليح 12 ملم', image: 'https://images.unsplash.com/photo-1567581935884-3349723552ca?w=100&q=80', sold: 890, revenue: 35600 },
-  { id: '3', name: 'Ceramic Floor Tile 60x60', nameAr: 'بلاط سيراميك أرضي 60×60', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=100&q=80', sold: 750, revenue: 28500 },
+  { id: '3', name: 'Ceramic Floor Tile 60x60', nameAr: 'بلاط سيراميك أرضي 60×60', image: 'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=100&q=80', sold: 750, revenue: 28500 },
   { id: '4', name: 'Interior Wall Paint 18L', nameAr: 'دهان حائط داخلي 18 لتر', image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=100&q=80', sold: 620, revenue: 74400 },
   { id: '5', name: 'Power Drill 750W', nameAr: 'شنيور كهربائي 750 واط', image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=100&q=80', sold: 340, revenue: 62900 },
 ];

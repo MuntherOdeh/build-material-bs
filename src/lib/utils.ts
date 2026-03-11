@@ -3,9 +3,9 @@ export function cn(...classes: (string | boolean | undefined | null)[]) {
 }
 
 export function formatPrice(price: number, locale: string = 'ar') {
-  return new Intl.NumberFormat(locale === 'ar' ? 'ar-SA' : 'en-US', {
+  return new Intl.NumberFormat(locale === 'ar' ? 'ar-AE' : 'en-AE', {
     style: 'currency',
-    currency: 'ILS',
+    currency: 'AED',
     minimumFractionDigits: 2,
   }).format(price);
 }

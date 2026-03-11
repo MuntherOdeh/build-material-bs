@@ -33,7 +33,7 @@ import {
 const CATEGORY_IMAGES: Record<string, string> = {
   'Cement & Concrete': 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=200&q=80',
   'Steel & Iron': 'https://images.unsplash.com/photo-1567581935884-3349723552ca?w=200&q=80',
-  'Wood & Doors': 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=200&q=80',
+  'Wood & Doors': 'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=200&q=80',
   'Paints & Colors': 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=200&q=80',
   Electrical: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=200&q=80',
   Plumbing: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=200&q=80',
@@ -68,10 +68,10 @@ interface Product {
 const products: Product[] = [
   // ── Cement & Concrete ──
   { id: 'CEM001', name: 'Portland Cement 50kg', nameAr: 'إسمنت بورتلاندي 50كغ', price: 35, image: 'https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?w=200&q=80', category: 'Cement & Concrete', categoryAr: 'إسمنت وخرسانة', unit: 'bag', unitAr: 'كيس', stock: 500, sku: 'CEM-PORT-50', barcode: '7290001000011' },
-  { id: 'CEM002', name: 'White Cement 25kg', nameAr: 'إسمنت أبيض 25كغ', price: 45, image: 'https://images.unsplash.com/photo-1590937276142-e58e6c064766?w=200&q=80', category: 'Cement & Concrete', categoryAr: 'إسمنت وخرسانة', unit: 'bag', unitAr: 'كيس', stock: 200, sku: 'CEM-WHT-25', barcode: '7290001000028' },
+  { id: 'CEM002', name: 'White Cement 25kg', nameAr: 'إسمنت أبيض 25كغ', price: 45, image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=200&q=80', category: 'Cement & Concrete', categoryAr: 'إسمنت وخرسانة', unit: 'bag', unitAr: 'كيس', stock: 200, sku: 'CEM-WHT-25', barcode: '7290001000028' },
   { id: 'CEM003', name: 'Ready Mix Concrete', nameAr: 'خرسانة جاهزة', price: 280, image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=200&q=80', category: 'Cement & Concrete', categoryAr: 'إسمنت وخرسانة', unit: 'ton', unitAr: 'طن', stock: 50, sku: 'CEM-RDY-MX', barcode: '7290001000035' },
   { id: 'CEM004', name: 'Cement Blocks', nameAr: 'بلوك إسمنتي', price: 4.5, image: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=200&q=80', category: 'Cement & Concrete', categoryAr: 'إسمنت وخرسانة', unit: 'piece', unitAr: 'حبة', stock: 2000, sku: 'CEM-BLK-01', barcode: '7290001000042' },
-  { id: 'CEM005', name: 'Mortar Mix', nameAr: 'خلطة مونة', price: 22, image: 'https://images.unsplash.com/photo-1607469256872-48074e807b0f?w=200&q=80', category: 'Cement & Concrete', categoryAr: 'إسمنت وخرسانة', unit: 'bag', unitAr: 'كيس', stock: 300, sku: 'CEM-MRT-01', barcode: '7290001000059' },
+  { id: 'CEM005', name: 'Mortar Mix', nameAr: 'خلطة مونة', price: 22, image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=200&q=80', category: 'Cement & Concrete', categoryAr: 'إسمنت وخرسانة', unit: 'bag', unitAr: 'كيس', stock: 300, sku: 'CEM-MRT-01', barcode: '7290001000059' },
 
   // ── Steel & Iron ──
   { id: 'STL001', name: 'Steel Rebar 12mm', nameAr: 'حديد تسليح 12مم', price: 18, image: 'https://images.unsplash.com/photo-1567581935884-3349723552ca?w=200&q=80', category: 'Steel & Iron', categoryAr: 'حديد وصلب', unit: 'meter', unitAr: 'متر', stock: 1000, sku: 'STL-RBR-12', barcode: '7290002000018' },
@@ -83,8 +83,8 @@ const products: Product[] = [
   // ── Wood & Doors ──
   { id: 'WOD001', name: 'Pine Wood Plank', nameAr: 'خشب صنوبر', price: 65, image: 'https://images.unsplash.com/photo-1520333789090-1afc82db536a?w=200&q=80', category: 'Wood & Doors', categoryAr: 'خشب وأبواب', unit: 'meter', unitAr: 'متر', stock: 400, sku: 'WOD-PIN-01', barcode: '7290003000015' },
   { id: 'WOD002', name: 'MDF Board', nameAr: 'لوح MDF', price: 120, image: 'https://images.unsplash.com/photo-1566837945700-30057527ade0?w=200&q=80', category: 'Wood & Doors', categoryAr: 'خشب وأبواب', unit: 'piece', unitAr: 'قطعة', stock: 100, sku: 'WOD-MDF-01', barcode: '7290003000022' },
-  { id: 'WOD003', name: 'Interior Door', nameAr: 'باب داخلي', price: 450, image: 'https://images.unsplash.com/photo-1506869640319-fe1a24fd76cb?w=200&q=80', category: 'Wood & Doors', categoryAr: 'خشب وأبواب', unit: 'piece', unitAr: 'قطعة', stock: 30, sku: 'WOD-DOR-INT', barcode: '7290003000039' },
-  { id: 'WOD004', name: 'Plywood Sheet', nameAr: 'خشب أبلكاش', price: 95, image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=200&q=80', category: 'Wood & Doors', categoryAr: 'خشب وأبواب', unit: 'piece', unitAr: 'قطعة', stock: 80, sku: 'WOD-PLY-01', barcode: '7290003000046' },
+  { id: 'WOD003', name: 'Interior Door', nameAr: 'باب داخلي', price: 450, image: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=200&q=80', category: 'Wood & Doors', categoryAr: 'خشب وأبواب', unit: 'piece', unitAr: 'قطعة', stock: 30, sku: 'WOD-DOR-INT', barcode: '7290003000039' },
+  { id: 'WOD004', name: 'Plywood Sheet', nameAr: 'خشب أبلكاش', price: 95, image: 'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=200&q=80', category: 'Wood & Doors', categoryAr: 'خشب وأبواب', unit: 'piece', unitAr: 'قطعة', stock: 80, sku: 'WOD-PLY-01', barcode: '7290003000046' },
   { id: 'WOD005', name: 'Wood Trim', nameAr: 'قص خشب', price: 15, image: 'https://images.unsplash.com/photo-1473163928189-364b2c4e1135?w=200&q=80', category: 'Wood & Doors', categoryAr: 'خشب وأبواب', unit: 'meter', unitAr: 'متر', stock: 600, sku: 'WOD-TRM-01', barcode: '7290003000053' },
 
   // ── Paints & Colors ──
@@ -92,18 +92,18 @@ const products: Product[] = [
   { id: 'PNT002', name: 'Exterior Paint 18L', nameAr: 'دهان خارجي 18 لتر', price: 220, image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=200&q=80', category: 'Paints & Colors', categoryAr: 'دهانات وألوان', unit: 'bucket', unitAr: 'سطل', stock: 45, sku: 'PNT-EXT-18', barcode: '7290004000029' },
   { id: 'PNT003', name: 'Wood Varnish', nameAr: 'ورنيش خشب', price: 85, image: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?w=200&q=80', category: 'Paints & Colors', categoryAr: 'دهانات وألوان', unit: 'liter', unitAr: 'لتر', stock: 100, sku: 'PNT-VRN-01', barcode: '7290004000036' },
   { id: 'PNT004', name: 'Primer 10L', nameAr: 'أساس دهان 10 لتر', price: 95, image: 'https://images.unsplash.com/photo-1600240644455-3edc55c375fe?w=200&q=80', category: 'Paints & Colors', categoryAr: 'دهانات وألوان', unit: 'bucket', unitAr: 'سطل', stock: 70, sku: 'PNT-PRM-10', barcode: '7290004000043' },
-  { id: 'PNT005', name: 'Spray Paint', nameAr: 'دهان بخاخ', price: 18, image: 'https://images.unsplash.com/photo-1594978583693-58e737d65097?w=200&q=80', category: 'Paints & Colors', categoryAr: 'دهانات وألوان', unit: 'piece', unitAr: 'حبة', stock: 200, sku: 'PNT-SPR-01', barcode: '7290004000050' },
+  { id: 'PNT005', name: 'Spray Paint', nameAr: 'دهان بخاخ', price: 18, image: 'https://images.unsplash.com/photo-1580894908361-967195033215?w=200&q=80', category: 'Paints & Colors', categoryAr: 'دهانات وألوان', unit: 'piece', unitAr: 'حبة', stock: 200, sku: 'PNT-SPR-01', barcode: '7290004000050' },
 
   // ── Electrical ──
   { id: 'ELC001', name: 'LED Panel 60x60', nameAr: 'لوحة LED 60x60', price: 75, image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=200&q=80', category: 'Electrical', categoryAr: 'كهرباء وإنارة', unit: 'piece', unitAr: 'قطعة', stock: 120, sku: 'ELC-LED-60', barcode: '7290005000019' },
   { id: 'ELC002', name: 'Electrical Wire 2.5mm', nameAr: 'سلك كهربائي 2.5مم', price: 2.5, image: 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=200&q=80', category: 'Electrical', categoryAr: 'كهرباء وإنارة', unit: 'meter', unitAr: 'متر', stock: 5000, sku: 'ELC-WIR-25', barcode: '7290005000026' },
   { id: 'ELC003', name: 'Switch Socket', nameAr: 'مفتاح ومقبس', price: 15, image: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=200&q=80', category: 'Electrical', categoryAr: 'كهرباء وإنارة', unit: 'piece', unitAr: 'قطعة', stock: 300, sku: 'ELC-SWT-01', barcode: '7290005000033' },
   { id: 'ELC004', name: 'Circuit Breaker', nameAr: 'قاطع كهربائي', price: 35, image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=200&q=80', category: 'Electrical', categoryAr: 'كهرباء وإنارة', unit: 'piece', unitAr: 'قطعة', stock: 150, sku: 'ELC-CBR-01', barcode: '7290005000040' },
-  { id: 'ELC005', name: 'LED Bulb 12W', nameAr: 'لمبة LED 12 واط', price: 12, image: 'https://images.unsplash.com/photo-1532007379945-e02b3a5b0bae?w=200&q=80', category: 'Electrical', categoryAr: 'كهرباء وإنارة', unit: 'piece', unitAr: 'قطعة', stock: 500, sku: 'ELC-BLB-12', barcode: '7290005000057' },
+  { id: 'ELC005', name: 'LED Bulb 12W', nameAr: 'لمبة LED 12 واط', price: 12, image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=200&q=80', category: 'Electrical', categoryAr: 'كهرباء وإنارة', unit: 'piece', unitAr: 'قطعة', stock: 500, sku: 'ELC-BLB-12', barcode: '7290005000057' },
 
   // ── Plumbing ──
   { id: 'PLM001', name: 'PVC Pipe 4inch', nameAr: 'أنبوب PVC 4 إنش', price: 28, image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=200&q=80', category: 'Plumbing', categoryAr: 'سباكة وصحية', unit: 'meter', unitAr: 'متر', stock: 400, sku: 'PLM-PVC-04', barcode: '7290006000016' },
-  { id: 'PLM002', name: 'Water Heater 50L', nameAr: 'سخان مياه 50 لتر', price: 650, image: 'https://images.unsplash.com/photo-1585315469903-b2e5ac7c46e8?w=200&q=80', category: 'Plumbing', categoryAr: 'سباكة وصحية', unit: 'piece', unitAr: 'قطعة', stock: 15, sku: 'PLM-WHT-50', barcode: '7290006000023' },
+  { id: 'PLM002', name: 'Water Heater 50L', nameAr: 'سخان مياه 50 لتر', price: 650, image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=200&q=80', category: 'Plumbing', categoryAr: 'سباكة وصحية', unit: 'piece', unitAr: 'قطعة', stock: 15, sku: 'PLM-WHT-50', barcode: '7290006000023' },
   { id: 'PLM003', name: 'Toilet Set', nameAr: 'طقم حمام', price: 850, image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=200&q=80', category: 'Plumbing', categoryAr: 'سباكة وصحية', unit: 'piece', unitAr: 'قطعة', stock: 10, sku: 'PLM-TLT-01', barcode: '7290006000030' },
   { id: 'PLM004', name: 'Faucet', nameAr: 'حنفية', price: 120, image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=200&q=80', category: 'Plumbing', categoryAr: 'سباكة وصحية', unit: 'piece', unitAr: 'قطعة', stock: 60, sku: 'PLM-FCT-01', barcode: '7290006000047' },
   { id: 'PLM005', name: 'Water Tank 1000L', nameAr: 'خزان مياه 1000 لتر', price: 450, image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=200&q=80', category: 'Plumbing', categoryAr: 'سباكة وصحية', unit: 'piece', unitAr: 'قطعة', stock: 8, sku: 'PLM-TNK-1K', barcode: '7290006000054' },
@@ -112,7 +112,7 @@ const products: Product[] = [
   { id: 'TIL001', name: 'Floor Tile 60x60', nameAr: 'بلاط أرضي 60x60', price: 45, image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=200&q=80', category: 'Tiles & Ceramics', categoryAr: 'بلاط وسيراميك', unit: 'sqm', unitAr: 'م²', stock: 800, sku: 'TIL-FLR-60', barcode: '7290007000013' },
   { id: 'TIL002', name: 'Wall Tile 30x60', nameAr: 'بلاط جداري 30x60', price: 38, image: 'https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=200&q=80', category: 'Tiles & Ceramics', categoryAr: 'بلاط وسيراميك', unit: 'sqm', unitAr: 'م²', stock: 600, sku: 'TIL-WLL-30', barcode: '7290007000020' },
   { id: 'TIL003', name: 'Porcelain Tile', nameAr: 'بورسلان', price: 65, image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=200&q=80', category: 'Tiles & Ceramics', categoryAr: 'بلاط وسيراميك', unit: 'sqm', unitAr: 'م²', stock: 400, sku: 'TIL-PRC-01', barcode: '7290007000037' },
-  { id: 'TIL004', name: 'Tile Adhesive 25kg', nameAr: 'لاصق بلاط 25كغ', price: 25, image: 'https://images.unsplash.com/photo-1607469256872-48074e807b0f?w=200&q=80', category: 'Tiles & Ceramics', categoryAr: 'بلاط وسيراميك', unit: 'bag', unitAr: 'كيس', stock: 250, sku: 'TIL-ADH-25', barcode: '7290007000044' },
+  { id: 'TIL004', name: 'Tile Adhesive 25kg', nameAr: 'لاصق بلاط 25كغ', price: 25, image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=200&q=80', category: 'Tiles & Ceramics', categoryAr: 'بلاط وسيراميك', unit: 'bag', unitAr: 'كيس', stock: 250, sku: 'TIL-ADH-25', barcode: '7290007000044' },
   { id: 'TIL005', name: 'Grout', nameAr: 'حشوة بلاط', price: 18, image: 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=200&q=80', category: 'Tiles & Ceramics', categoryAr: 'بلاط وسيراميك', unit: 'bag', unitAr: 'كيس', stock: 350, sku: 'TIL-GRT-01', barcode: '7290007000051' },
 ];
 
@@ -650,7 +650,7 @@ export default function POSPage() {
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">{isRTL ? 'الخصم' : 'Discount'}</span>
                 <div className="relative w-28">
-                  <span className="absolute start-2 top-1/2 -translate-y-1/2 text-gray-500 text-xs">₪</span>
+                  <span className="absolute start-2 top-1/2 -translate-y-1/2 text-gray-500 text-xs">د.إ</span>
                   <input
                     type="number"
                     min="0"
@@ -713,7 +713,7 @@ export default function POSPage() {
             {paymentMethod === 'CASH' && (
               <div className="px-4 pb-3 space-y-2">
                 <div className="relative">
-                  <span className="absolute start-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">₪</span>
+                  <span className="absolute start-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">د.إ</span>
                   <input
                     type="number"
                     min="0"

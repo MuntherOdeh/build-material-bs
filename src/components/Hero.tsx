@@ -133,7 +133,7 @@ export default function Hero() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-dark-900">{isRTL ? 'توصيل مجاني' : 'Free Delivery'}</p>
-                  <p className="text-xs text-dark-500">{isRTL ? 'للطلبات فوق ₪500' : 'Orders over 500'}</p>
+                  <p className="text-xs text-dark-500">{isRTL ? 'للطلبات فوق 500 د.إ' : 'Orders over AED 500'}</p>
                 </div>
               </motion.div>
 

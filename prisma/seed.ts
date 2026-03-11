@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const categoryImages: Record<string, string> = {
   cement: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&q=80',
   steel: 'https://images.unsplash.com/photo-1567581935884-3349723552ca?w=400&q=80',
-  wood: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=80',
+  wood: 'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=400&q=80',
   paint: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&q=80',
   electrical: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&q=80',
   plumbing: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80',
@@ -14,7 +14,7 @@ const categoryImages: Record<string, string> = {
   tools: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80',
   sand: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80',
   insulation: 'https://images.unsplash.com/photo-1607400201515-c2c41c07d307?w=400&q=80',
-  glass: 'https://images.unsplash.com/photo-1596547609652-9cf5d8c76921?w=400&q=80',
+  glass: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&q=80',
   safety: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&q=80',
 };
 
@@ -40,10 +40,10 @@ const productsData: Record<string, Array<{
 }>> = {
   'cement-concrete': [
     { name: 'Portland Cement 50kg', nameAr: 'اسمنت بورتلاندي 50 كغم', sku: 'CEM-001', barcode: '5901234560001', price: 35, costPrice: 28, unit: 'bag', unitAr: 'كيس', stock: 500, featured: true, image: 'https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?w=400&q=80' },
-    { name: 'White Cement 25kg', nameAr: 'اسمنت أبيض 25 كغم', sku: 'CEM-002', barcode: '5901234560002', price: 45, costPrice: 36, unit: 'bag', unitAr: 'كيس', stock: 200, image: 'https://images.unsplash.com/photo-1590937276142-e58e6c064766?w=400&q=80' },
+    { name: 'White Cement 25kg', nameAr: 'اسمنت أبيض 25 كغم', sku: 'CEM-002', barcode: '5901234560002', price: 45, costPrice: 36, unit: 'bag', unitAr: 'كيس', stock: 200, image: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=400&q=80' },
     { name: 'Ready Mix Concrete', nameAr: 'خرسانة جاهزة', sku: 'CEM-003', barcode: '5901234560003', price: 450, costPrice: 380, unit: 'cubic meter', unitAr: 'متر مكعب', stock: 100, image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80' },
     { name: 'Cement Mortar 25kg', nameAr: 'ملاط اسمنتي 25 كغم', sku: 'CEM-004', barcode: '5901234560004', price: 28, costPrice: 22, unit: 'bag', unitAr: 'كيس', stock: 300, image: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=400&q=80' },
-    { name: 'Self-Leveling Compound 20kg', nameAr: 'مادة تسوية ذاتية 20 كغم', sku: 'CEM-005', barcode: '5901234560005', price: 65, costPrice: 50, unit: 'bag', unitAr: 'كيس', stock: 150, featured: true, image: 'https://images.unsplash.com/photo-1607469256872-48074e807b0f?w=400&q=80' },
+    { name: 'Self-Leveling Compound 20kg', nameAr: 'مادة تسوية ذاتية 20 كغم', sku: 'CEM-005', barcode: '5901234560005', price: 65, costPrice: 50, unit: 'bag', unitAr: 'كيس', stock: 150, featured: true, image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=400&q=80' },
   ],
   'steel-iron': [
     { name: 'Steel Rebar 12mm', nameAr: 'حديد تسليح 12 مم', sku: 'STL-001', barcode: '5901234560010', price: 18, costPrice: 14, unit: 'meter', unitAr: 'متر', stock: 2000, featured: true, image: 'https://images.unsplash.com/photo-1567581935884-3349723552ca?w=400&q=80' },
@@ -55,8 +55,8 @@ const productsData: Record<string, Array<{
   'wood-doors': [
     { name: 'Plywood Sheet 18mm', nameAr: 'لوح خشب رقائقي 18 مم', sku: 'WOD-001', barcode: '5901234560020', price: 180, costPrice: 140, unit: 'sheet', unitAr: 'لوح', stock: 100, featured: true, image: 'https://images.unsplash.com/photo-1520333789090-1afc82db536a?w=400&q=80' },
     { name: 'MDF Board 16mm', nameAr: 'لوح MDF 16 مم', sku: 'WOD-002', barcode: '5901234560021', price: 150, costPrice: 115, unit: 'sheet', unitAr: 'لوح', stock: 120, image: 'https://images.unsplash.com/photo-1566837945700-30057527ade0?w=400&q=80' },
-    { name: 'Interior Wooden Door', nameAr: 'باب خشبي داخلي', sku: 'WOD-003', barcode: '5901234560022', price: 450, costPrice: 350, unit: 'piece', unitAr: 'قطعة', stock: 40, image: 'https://images.unsplash.com/photo-1506869640319-fe1a24fd76cb?w=400&q=80' },
-    { name: 'Wooden Beams 10x10cm', nameAr: 'عوارض خشبية 10×10 سم', sku: 'WOD-004', barcode: '5901234560023', price: 45, costPrice: 35, unit: 'meter', unitAr: 'متر', stock: 200, image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=80' },
+    { name: 'Interior Wooden Door', nameAr: 'باب خشبي داخلي', sku: 'WOD-003', barcode: '5901234560022', price: 450, costPrice: 350, unit: 'piece', unitAr: 'قطعة', stock: 40, image: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=400&q=80' },
+    { name: 'Wooden Beams 10x10cm', nameAr: 'عوارض خشبية 10×10 سم', sku: 'WOD-004', barcode: '5901234560023', price: 45, costPrice: 35, unit: 'meter', unitAr: 'متر', stock: 200, image: 'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=400&q=80' },
     { name: 'Door Frame Set', nameAr: 'طقم إطار باب', sku: 'WOD-005', barcode: '5901234560024', price: 120, costPrice: 90, unit: 'set', unitAr: 'طقم', stock: 60, featured: true, image: 'https://images.unsplash.com/photo-1473163928189-364b2c4e1135?w=400&q=80' },
   ],
   'paints-colors': [
@@ -64,7 +64,7 @@ const productsData: Record<string, Array<{
     { name: 'Exterior Paint 18L', nameAr: 'دهان خارجي 18 لتر', sku: 'PNT-002', barcode: '5901234560031', price: 280, costPrice: 220, unit: 'bucket', unitAr: 'سطل', stock: 100, image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&q=80' },
     { name: 'Primer Coat 4L', nameAr: 'طبقة أساس 4 لتر', sku: 'PNT-003', barcode: '5901234560032', price: 65, costPrice: 48, unit: 'can', unitAr: 'علبة', stock: 200, image: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?w=400&q=80' },
     { name: 'Wood Varnish 1L', nameAr: 'ورنيش خشب 1 لتر', sku: 'PNT-004', barcode: '5901234560033', price: 45, costPrice: 32, unit: 'can', unitAr: 'علبة', stock: 180, image: 'https://images.unsplash.com/photo-1600240644455-3edc55c375fe?w=400&q=80' },
-    { name: 'Spray Paint 400ml', nameAr: 'بخاخ دهان 400 مل', sku: 'PNT-005', barcode: '5901234560034', price: 25, costPrice: 18, unit: 'can', unitAr: 'علبة', stock: 300, image: 'https://images.unsplash.com/photo-1594978583693-58e737d65097?w=400&q=80' },
+    { name: 'Spray Paint 400ml', nameAr: 'بخاخ دهان 400 مل', sku: 'PNT-005', barcode: '5901234560034', price: 25, costPrice: 18, unit: 'can', unitAr: 'علبة', stock: 300, image: 'https://images.unsplash.com/photo-1580894908361-967195033215?w=400&q=80' },
     { name: 'Waterproof Paint 10L', nameAr: 'دهان مقاوم للماء 10 لتر', sku: 'PNT-006', barcode: '5901234560035', price: 190, costPrice: 150, unit: 'bucket', unitAr: 'سطل', stock: 80, image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&q=80' },
   ],
   'electrical-lighting': [
@@ -72,12 +72,12 @@ const productsData: Record<string, Array<{
     { name: 'Electrical Wire 2.5mm Roll', nameAr: 'سلك كهربائي 2.5 مم رول', sku: 'ELC-002', barcode: '5901234560041', price: 120, costPrice: 90, unit: 'roll', unitAr: 'لفة', stock: 300, image: 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=400&q=80' },
     { name: 'Distribution Board 12 Way', nameAr: 'لوحة توزيع 12 طريقة', sku: 'ELC-003', barcode: '5901234560042', price: 180, costPrice: 135, unit: 'piece', unitAr: 'قطعة', stock: 50, image: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=400&q=80' },
     { name: 'Light Switch', nameAr: 'مفتاح إنارة', sku: 'ELC-004', barcode: '5901234560043', price: 15, costPrice: 9, unit: 'piece', unitAr: 'قطعة', stock: 500, image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&q=80' },
-    { name: 'Power Outlet Double', nameAr: 'مقبس كهربائي مزدوج', sku: 'ELC-005', barcode: '5901234560044', price: 18, costPrice: 11, unit: 'piece', unitAr: 'قطعة', stock: 400, image: 'https://images.unsplash.com/photo-1532007379945-e02b3a5b0bae?w=400&q=80' },
+    { name: 'Power Outlet Double', nameAr: 'مقبس كهربائي مزدوج', sku: 'ELC-005', barcode: '5901234560044', price: 18, costPrice: 11, unit: 'piece', unitAr: 'قطعة', stock: 400, image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=400&q=80' },
     { name: 'LED Bulb 12W', nameAr: 'لمبة LED 12 واط', sku: 'ELC-006', barcode: '5901234560045', price: 12, costPrice: 7, unit: 'piece', unitAr: 'قطعة', stock: 800, image: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&q=80' },
   ],
   'plumbing-sanitary': [
     { name: 'PVC Pipe 4 inch 3m', nameAr: 'أنبوب PVC 4 بوصة 3 م', sku: 'PLB-001', barcode: '5901234560050', price: 45, costPrice: 32, unit: 'piece', unitAr: 'قطعة', stock: 200, image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&q=80' },
-    { name: 'Water Heater 50L', nameAr: 'سخان مياه 50 لتر', sku: 'PLB-002', barcode: '5901234560051', price: 650, costPrice: 500, unit: 'piece', unitAr: 'قطعة', stock: 30, featured: true, image: 'https://images.unsplash.com/photo-1585315469903-b2e5ac7c46e8?w=400&q=80' },
+    { name: 'Water Heater 50L', nameAr: 'سخان مياه 50 لتر', sku: 'PLB-002', barcode: '5901234560051', price: 650, costPrice: 500, unit: 'piece', unitAr: 'قطعة', stock: 30, featured: true, image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80' },
     { name: 'Kitchen Faucet', nameAr: 'حنفية مطبخ', sku: 'PLB-003', barcode: '5901234560052', price: 180, costPrice: 130, unit: 'piece', unitAr: 'قطعة', stock: 60, image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&q=80' },
     { name: 'Toilet Set Complete', nameAr: 'طقم حمام كامل', sku: 'PLB-004', barcode: '5901234560053', price: 850, costPrice: 650, unit: 'set', unitAr: 'طقم', stock: 20, image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&q=80' },
     { name: 'Bathroom Sink', nameAr: 'مغسلة حمام', sku: 'PLB-005', barcode: '5901234560054', price: 250, costPrice: 180, unit: 'piece', unitAr: 'قطعة', stock: 40, image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=80' },
@@ -86,7 +86,7 @@ const productsData: Record<string, Array<{
     { name: 'Ceramic Floor Tile 60x60', nameAr: 'بلاط أرضي سيراميك 60×60', sku: 'TIL-001', barcode: '5901234560060', price: 55, costPrice: 40, unit: 'sqm', unitAr: 'متر مربع', stock: 500, featured: true, image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&q=80' },
     { name: 'Porcelain Tile 80x80', nameAr: 'بلاط بورسلان 80×80', sku: 'TIL-002', barcode: '5901234560061', price: 85, costPrice: 62, unit: 'sqm', unitAr: 'متر مربع', stock: 400, image: 'https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=400&q=80' },
     { name: 'Wall Tile 30x60 White', nameAr: 'بلاط جدران 30×60 أبيض', sku: 'TIL-003', barcode: '5901234560062', price: 42, costPrice: 30, unit: 'sqm', unitAr: 'متر مربع', stock: 600, image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&q=80' },
-    { name: 'Mosaic Tile Sheet', nameAr: 'بلاط موزاييك', sku: 'TIL-004', barcode: '5901234560063', price: 120, costPrice: 85, unit: 'sqm', unitAr: 'متر مربع', stock: 150, image: 'https://images.unsplash.com/photo-1607469256872-48074e807b0f?w=400&q=80' },
+    { name: 'Mosaic Tile Sheet', nameAr: 'بلاط موزاييك', sku: 'TIL-004', barcode: '5901234560063', price: 120, costPrice: 85, unit: 'sqm', unitAr: 'متر مربع', stock: 150, image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=400&q=80' },
     { name: 'Tile Adhesive 25kg', nameAr: 'لاصق بلاط 25 كغم', sku: 'TIL-005', barcode: '5901234560064', price: 35, costPrice: 25, unit: 'bag', unitAr: 'كيس', stock: 400, image: 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=400&q=80' },
     { name: 'Tile Grout 5kg', nameAr: 'مادة حشو بلاط 5 كغم', sku: 'TIL-006', barcode: '5901234560065', price: 22, costPrice: 15, unit: 'bag', unitAr: 'كيس', stock: 350, image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=400&q=80' },
   ],
@@ -95,7 +95,7 @@ const productsData: Record<string, Array<{
     { name: 'Angle Grinder 125mm', nameAr: 'جلاخة زاوية 125 مم', sku: 'TOL-002', barcode: '5901234560071', price: 220, costPrice: 165, unit: 'piece', unitAr: 'قطعة', stock: 35, image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=80' },
     { name: 'Measuring Tape 5m', nameAr: 'شريط قياس 5 م', sku: 'TOL-003', barcode: '5901234560072', price: 18, costPrice: 10, unit: 'piece', unitAr: 'قطعة', stock: 200, image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&q=80' },
     { name: 'Spirit Level 60cm', nameAr: 'ميزان ماء 60 سم', sku: 'TOL-004', barcode: '5901234560073', price: 35, costPrice: 22, unit: 'piece', unitAr: 'قطعة', stock: 80, image: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&q=80' },
-    { name: 'Wheelbarrow', nameAr: 'عربة يدوية', sku: 'TOL-005', barcode: '5901234560074', price: 150, costPrice: 110, unit: 'piece', unitAr: 'قطعة', stock: 25, image: 'https://images.unsplash.com/photo-1590765097886-090b9d4a1b11?w=400&q=80' },
+    { name: 'Wheelbarrow', nameAr: 'عربة يدوية', sku: 'TOL-005', barcode: '5901234560074', price: 150, costPrice: 110, unit: 'piece', unitAr: 'قطعة', stock: 25, image: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400&q=80' },
   ],
   'sand-gravel': [
     { name: 'Building Sand (ton)', nameAr: 'رمل بناء (طن)', sku: 'SND-001', barcode: '5901234560080', price: 180, costPrice: 130, unit: 'ton', unitAr: 'طن', stock: 100, featured: true, image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80' },
@@ -108,11 +108,11 @@ const productsData: Record<string, Array<{
     { name: 'Foam Board 5cm', nameAr: 'لوح فوم 5 سم', sku: 'INS-001', barcode: '5901234560090', price: 35, costPrice: 25, unit: 'sqm', unitAr: 'متر مربع', stock: 300, image: 'https://images.unsplash.com/photo-1607400201515-c2c41c07d307?w=400&q=80' },
     { name: 'Rock Wool Roll 50mm', nameAr: 'صوف صخري رول 50 مم', sku: 'INS-002', barcode: '5901234560091', price: 55, costPrice: 40, unit: 'sqm', unitAr: 'متر مربع', stock: 200, featured: true, image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=80' },
     { name: 'Waterproofing Membrane', nameAr: 'غشاء عزل مائي', sku: 'INS-003', barcode: '5901234560092', price: 28, costPrice: 18, unit: 'sqm', unitAr: 'متر مربع', stock: 500, image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=80' },
-    { name: 'Thermal Insulation Tape', nameAr: 'شريط عزل حراري', sku: 'INS-004', barcode: '5901234560093', price: 15, costPrice: 8, unit: 'roll', unitAr: 'لفة', stock: 400, image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=80' },
+    { name: 'Thermal Insulation Tape', nameAr: 'شريط عزل حراري', sku: 'INS-004', barcode: '5901234560093', price: 15, costPrice: 8, unit: 'roll', unitAr: 'لفة', stock: 400, image: 'https://images.unsplash.com/photo-1574359411659-15573a27fd0c?w=400&q=80' },
     { name: 'Bitumen Roll 1x10m', nameAr: 'رول بيتومين 1×10 م', sku: 'INS-005', barcode: '5901234560094', price: 85, costPrice: 60, unit: 'roll', unitAr: 'لفة', stock: 100, image: 'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=400&q=80' },
   ],
   'glass-mirrors': [
-    { name: 'Clear Glass 6mm', nameAr: 'زجاج شفاف 6 مم', sku: 'GLS-001', barcode: '5901234560100', price: 60, costPrice: 42, unit: 'sqm', unitAr: 'متر مربع', stock: 150, image: 'https://images.unsplash.com/photo-1596547609652-9cf5d8c76921?w=400&q=80' },
+    { name: 'Clear Glass 6mm', nameAr: 'زجاج شفاف 6 مم', sku: 'GLS-001', barcode: '5901234560100', price: 60, costPrice: 42, unit: 'sqm', unitAr: 'متر مربع', stock: 150, image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&q=80' },
     { name: 'Tempered Glass 10mm', nameAr: 'زجاج مقسى 10 مم', sku: 'GLS-002', barcode: '5901234560101', price: 140, costPrice: 100, unit: 'sqm', unitAr: 'متر مربع', stock: 80, featured: true, image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=400&q=80' },
     { name: 'Mirror 4mm', nameAr: 'مرآة 4 مم', sku: 'GLS-003', barcode: '5901234560102', price: 75, costPrice: 50, unit: 'sqm', unitAr: 'متر مربع', stock: 100, image: 'https://images.unsplash.com/photo-1616627547584-bf28cee262db?w=400&q=80' },
     { name: 'Double Glazed Unit', nameAr: 'وحدة زجاج مزدوج', sku: 'GLS-004', barcode: '5901234560103', price: 220, costPrice: 165, unit: 'sqm', unitAr: 'متر مربع', stock: 50, image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80' },
