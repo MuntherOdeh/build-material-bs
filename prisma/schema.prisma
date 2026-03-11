@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  nameAr    String?
+  role      Role     @default(CUSTOMER)
+  phone     String?
+  address   String?
+  avatar    String?
+  orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  nameAr      String
+  slug        String    @unique
+  description String?
+  descriptionAr String?
+  image       String?
+  icon        String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  name        String
+  nameAr      String
+  description String?
+  descriptionAr String?
+  sku         String      @unique
+  barcode     String?     @unique
+  price       Float
+  costPrice   Float       @default(0)
+  salePrice   Float?
+  unit        String      @default("piece")
+  unitAr      String      @default("قطعة")
+  stock       Int         @default(0)
+  minStock    Int         @default(5)
+  image       String?
+  images      String[]
+  categoryId  String
+  category    Category    @relation(fields: [categoryId], references: [id])
+  featured    Boolean     @default(false)
+  active      Boolean     @default(true)
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([categoryId])
+  @@index([sku])
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique
+  type          OrderType   @default(ONLINE)
+  status        OrderStatus @default(PENDING)
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id])
+  customerName  String?
+  customerPhone String?
+  customerEmail String?
+  items         OrderItem[]
+  subtotal      Float
+  tax           Float       @default(0)
+  discount      Float       @default(0)
+  total         Float
+  notes         String?
+  paymentMethod PaymentMethod @default(CASH)
+  paidAt        DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+  total     Float
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  CASHIER
+  CUSTOMER
+}
+
+enum OrderType {
+  ONLINE
+  POS
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  BANK_TRANSFER
+  ONLINE
+}
