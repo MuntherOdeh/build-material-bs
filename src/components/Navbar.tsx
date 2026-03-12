@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/cart';
 import {
   ShoppingCart,
@@ -14,6 +14,7 @@ import {
   User,
   Building2,
   ChevronDown,
+  Languages,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -24,6 +25,8 @@ export default function Navbar({ locale }: NavbarProps) {
   const t = useTranslations('common');
   const tCat = useTranslations('categories');
   const pathname = usePathname();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const itemCount = useCartStore((s) => s.getItemCount());
 
   const [scrolled, setScrolled] = useState(false);
@@ -35,16 +38,12 @@ export default function Navbar({ locale }: NavbarProps) {
   const categoriesRef = useRef<HTMLDivElement>(null);
   const isRTL = locale === 'ar';
 
-  // Scroll detection for glass-morphism effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close categories dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (categoriesRef.current && !categoriesRef.current.contains(e.target as Node)) {
@@ -55,28 +54,35 @@ export default function Navbar({ locale }: NavbarProps) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Lock body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  // Build language-switched path
-  const getLocaleSwitchPath = () => {
-    const targetLocale = locale === 'ar' ? 'en' : 'ar';
-    // Replace the current locale segment with the target
-    const segments = pathname.split('/');
-    if (segments[1] === 'ar' || segments[1] === 'en') {
-      segments[1] = targetLocale;
-    } else {
-      segments.splice(1, 0, targetLocale);
+  // Switch language handler - fast with router.replace
+  const switchLanguage = (targetLocale: string) => {
+    // Remove current locale prefix from pathname
+    let path = pathname;
+    if (path.startsWith('/ar')) {
+      path = path.slice(3) || '/';
+    } else if (path.startsWith('/en')) {
+      path = path.slice(3) || '/';
     }
-    return segments.join('/') || '/';
+
+    // Build new path
+    const newPath = targetLocale === 'ar' ? path : `/en${path}`;
+
+    startTransition(() => {
+      router.replace(newPath);
+    });
+    setMobileOpen(false);
   };
 
-  const localePath = (path: string) => `/${locale}${path}`;
+  // For default locale (ar), no prefix needed. For en, prefix with /en
+  const localePath = (path: string) => {
+    if (locale === 'ar') return path;
+    return `/${locale}${path}`;
+  };
 
   const navLinks = [
     { href: '/', label: t('home') },
@@ -102,7 +108,7 @@ export default function Navbar({ locale }: NavbarProps) {
 
   const isActive = (path: string) => {
     const fullPath = localePath(path);
-    if (path === '/') return pathname === fullPath;
+    if (path === '/') return pathname === fullPath || pathname === `/${locale}`;
     return pathname.startsWith(fullPath);
   };
 
@@ -115,7 +121,6 @@ export default function Navbar({ locale }: NavbarProps) {
             : 'bg-white'
         }`}
       >
-        {/* Top accent line */}
         <div className="h-0.5 w-full bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -125,10 +130,8 @@ export default function Navbar({ locale }: NavbarProps) {
               href={localePath('/')}
               className="flex items-center gap-2.5 group flex-shrink-0"
             >
-              <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg shadow-primary-500/25 group-hover:shadow-primary-500/40 transition-all duration-300 group-hover:scale-105">
-                  <Building2 className="w-5 h-5 text-white" />
-                </div>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg shadow-primary-500/25 group-hover:shadow-primary-500/40 transition-all duration-300 group-hover:scale-105">
+                <Building2 className="w-5 h-5 text-white" />
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-dark-950 leading-tight tracking-tight group-hover:text-primary-600 transition-colors duration-300">
@@ -177,7 +180,6 @@ export default function Navbar({ locale }: NavbarProps) {
                   />
                 </button>
 
-                {/* Dropdown Menu */}
                 <div
                   className={`absolute top-full mt-2 ${
                     isRTL ? 'right-0' : 'left-0'
@@ -218,9 +220,7 @@ export default function Navbar({ locale }: NavbarProps) {
               <div className="hidden md:flex items-center relative">
                 <div
                   className={`flex items-center transition-all duration-500 ease-out overflow-hidden ${
-                    searchOpen
-                      ? 'w-64 opacity-100'
-                      : 'w-0 opacity-0'
+                    searchOpen ? 'w-64 opacity-100' : 'w-0 opacity-0'
                   }`}
                 >
                   <input
@@ -242,22 +242,47 @@ export default function Navbar({ locale }: NavbarProps) {
                   className="w-10 h-10 flex items-center justify-center rounded-xl text-dark-500 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300"
                   aria-label="Search"
                 >
-                  {searchOpen ? (
-                    <X className="w-4.5 h-4.5" />
-                  ) : (
-                    <Search className="w-4.5 h-4.5" />
-                  )}
+                  {searchOpen ? <X className="w-4 h-4" /> : <Search className="w-4 h-4" />}
                 </button>
               </div>
 
-              {/* Language Switcher */}
-              <Link
-                href={getLocaleSwitchPath()}
-                className="w-10 h-10 flex items-center justify-center rounded-xl text-dark-500 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300 group"
-                title={locale === 'ar' ? t('english') : t('arabic')}
+              {/* Language Switcher - Desktop - VISIBLE with text */}
+              <div className="hidden sm:flex items-center">
+                <div className="flex items-center bg-dark-50 rounded-xl p-0.5 border border-dark-100">
+                  <button
+                    onClick={() => switchLanguage('ar')}
+                    disabled={isPending}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 ${
+                      locale === 'ar'
+                        ? 'bg-primary-500 text-white shadow-md shadow-primary-500/25'
+                        : 'text-dark-500 hover:text-dark-700'
+                    }`}
+                  >
+                    العربية
+                  </button>
+                  <button
+                    onClick={() => switchLanguage('en')}
+                    disabled={isPending}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 ${
+                      locale === 'en'
+                        ? 'bg-primary-500 text-white shadow-md shadow-primary-500/25'
+                        : 'text-dark-500 hover:text-dark-700'
+                    }`}
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+
+              {/* Language Switcher - Mobile (small globe + label) */}
+              <button
+                onClick={() => switchLanguage(locale === 'ar' ? 'en' : 'ar')}
+                disabled={isPending}
+                className="sm:hidden w-10 h-10 flex items-center justify-center rounded-xl text-dark-500 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300"
+                aria-label={locale === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
               >
-                <Globe className="w-[18px] h-[18px] group-hover:rotate-180 transition-transform duration-700" />
-              </Link>
+                <Languages className="w-[18px] h-[18px]" />
+              </button>
 
               {/* Cart */}
               <Link
@@ -267,7 +292,7 @@ export default function Navbar({ locale }: NavbarProps) {
               >
                 <ShoppingCart className="w-[18px] h-[18px]" />
                 {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[10px] font-bold text-white bg-primary-500 rounded-full ring-2 ring-white animate-in zoom-in duration-300">
+                  <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[10px] font-bold text-white bg-primary-500 rounded-full ring-2 ring-white">
                     {itemCount > 99 ? '99+' : itemCount}
                   </span>
                 )}
@@ -275,7 +300,7 @@ export default function Navbar({ locale }: NavbarProps) {
 
               {/* Login Button - Desktop */}
               <Link
-                href={localePath('/login')}
+                href={localePath('/auth/login')}
                 className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 shadow-md shadow-primary-500/20 hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 active:scale-[0.97]"
               >
                 <User className="w-4 h-4" />
@@ -288,11 +313,7 @@ export default function Navbar({ locale }: NavbarProps) {
                 className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-dark-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300"
                 aria-label="Menu"
               >
-                {mobileOpen ? (
-                  <X className="w-5 h-5" />
-                ) : (
-                  <Menu className="w-5 h-5" />
-                )}
+                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
@@ -328,7 +349,7 @@ export default function Navbar({ locale }: NavbarProps) {
               className="flex items-center gap-2.5"
             >
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
-                <Building2 className="w-4.5 h-4.5 text-white" />
+                <Building2 className="w-4 h-4 text-white" />
               </div>
               <span className="text-lg font-bold text-dark-950">
                 {isRTL ? 'بنيان' : 'Bunyan'}
@@ -398,19 +419,38 @@ export default function Navbar({ locale }: NavbarProps) {
 
           {/* Drawer Footer */}
           <div className="p-4 border-t border-dark-100 space-y-3">
-            {/* Language Switch */}
-            <Link
-              href={getLocaleSwitchPath()}
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-dark-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
-            >
-              <Globe className="w-4.5 h-4.5" />
-              {locale === 'ar' ? t('english') : t('arabic')}
-            </Link>
+            {/* Language Switch - Mobile - Clear toggle buttons */}
+            <div className="flex items-center gap-2 px-2">
+              <Languages className="w-4 h-4 text-dark-400" />
+              <div className="flex-1 flex items-center bg-dark-50 rounded-xl p-0.5 border border-dark-100">
+                <button
+                  onClick={() => switchLanguage('ar')}
+                  disabled={isPending}
+                  className={`flex-1 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                    locale === 'ar'
+                      ? 'bg-primary-500 text-white shadow-md'
+                      : 'text-dark-500 hover:text-dark-700'
+                  }`}
+                >
+                  العربية
+                </button>
+                <button
+                  onClick={() => switchLanguage('en')}
+                  disabled={isPending}
+                  className={`flex-1 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                    locale === 'en'
+                      ? 'bg-primary-500 text-white shadow-md'
+                      : 'text-dark-500 hover:text-dark-700'
+                  }`}
+                >
+                  English
+                </button>
+              </div>
+            </div>
 
             {/* Login Button */}
             <Link
-              href={localePath('/login')}
+              href={localePath('/auth/login')}
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-primary-500 to-primary-600 shadow-md shadow-primary-500/20 transition-all duration-300 active:scale-[0.97]"
             >
