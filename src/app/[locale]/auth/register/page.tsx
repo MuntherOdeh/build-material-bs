@@ -43,7 +43,7 @@ export default function RegisterPage() {
       {/* Left Decorative Panel */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
+          src="https://plus.unsplash.com/premium_photo-1661905665720-3b1663ec1e99?w=800&q=80"
           alt="Construction"
           fill
           className="object-cover"
