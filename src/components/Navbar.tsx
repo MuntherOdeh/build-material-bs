@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useRef, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useCartStore } from '@/store/cart';
 import {
   ShoppingCart,
@@ -59,30 +58,12 @@ export default function Navbar({ locale }: NavbarProps) {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  // Switch language handler - fast with router.replace
+  // Switch language handler - uses next-intl router for fast client-side transition
   const switchLanguage = (targetLocale: string) => {
-    // Remove current locale prefix from pathname
-    let path = pathname;
-    for (const loc of ['ar', 'en', 'ur']) {
-      if (path.startsWith(`/${loc}/`) || path === `/${loc}`) {
-        path = path.slice(3) || '/';
-        break;
-      }
-    }
-
-    // Build new path - Arabic (default) has no prefix
-    const newPath = targetLocale === 'ar' ? path : `/${targetLocale}${path}`;
-
     startTransition(() => {
-      router.replace(newPath);
+      router.replace(pathname, { locale: targetLocale as any });
     });
     setMobileOpen(false);
-  };
-
-  // For default locale (ar), no prefix needed. For en, prefix with /en
-  const localePath = (path: string) => {
-    if (locale === 'ar') return path;
-    return `/${locale}${path}`;
   };
 
   const navLinks = [
@@ -108,9 +89,8 @@ export default function Navbar({ locale }: NavbarProps) {
   ];
 
   const isActive = (path: string) => {
-    const fullPath = localePath(path);
-    if (path === '/') return pathname === fullPath || pathname === `/${locale}`;
-    return pathname.startsWith(fullPath);
+    if (path === '/') return pathname === '/';
+    return pathname.startsWith(path);
   };
 
   return (
@@ -128,7 +108,7 @@ export default function Navbar({ locale }: NavbarProps) {
           <div className="flex items-center justify-between h-16 lg:h-18">
             {/* Logo */}
             <Link
-              href={localePath('/')}
+              href={'/'}
               className="flex items-center gap-2.5 group flex-shrink-0"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg shadow-primary-500/25 group-hover:shadow-primary-500/40 transition-all duration-300 group-hover:scale-105">
@@ -149,7 +129,7 @@ export default function Navbar({ locale }: NavbarProps) {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={localePath(link.href)}
+                  href={link.href}
                   className={`relative px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                     isActive(link.href)
                       ? 'text-primary-600 bg-primary-50'
@@ -194,7 +174,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     {categories.map((cat) => (
                       <Link
                         key={cat.key}
-                        href={localePath(cat.href)}
+                        href={cat.href}
                         onClick={() => setCategoriesOpen(false)}
                         className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-dark-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
                       >
@@ -204,7 +184,7 @@ export default function Navbar({ locale }: NavbarProps) {
                   </div>
                   <div className="border-t border-dark-100 p-2">
                     <Link
-                      href={localePath('/products')}
+                      href={'/products'}
                       onClick={() => setCategoriesOpen(false)}
                       className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-semibold text-primary-600 hover:bg-primary-50 transition-all duration-200"
                     >
@@ -287,7 +267,7 @@ export default function Navbar({ locale }: NavbarProps) {
 
               {/* Cart */}
               <Link
-                href={localePath('/cart')}
+                href={'/cart'}
                 className="relative w-10 h-10 flex items-center justify-center rounded-xl text-dark-500 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300"
                 aria-label={t('cart')}
               >
@@ -301,7 +281,7 @@ export default function Navbar({ locale }: NavbarProps) {
 
               {/* Login Button - Desktop */}
               <Link
-                href={localePath('/auth/login')}
+                href={'/auth/login'}
                 className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 shadow-md shadow-primary-500/20 hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 active:scale-[0.97]"
               >
                 <User className="w-4 h-4" />
@@ -345,7 +325,7 @@ export default function Navbar({ locale }: NavbarProps) {
           {/* Drawer Header */}
           <div className="flex items-center justify-between p-4 border-b border-dark-100">
             <Link
-              href={localePath('/')}
+              href={'/'}
               onClick={() => setMobileOpen(false)}
               className="flex items-center gap-2.5"
             >
@@ -388,7 +368,7 @@ export default function Navbar({ locale }: NavbarProps) {
             {navLinks.map((link) => (
               <Link
                 key={link.href}
-                href={localePath(link.href)}
+                href={link.href}
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isActive(link.href)
@@ -408,7 +388,7 @@ export default function Navbar({ locale }: NavbarProps) {
               {categories.map((cat) => (
                 <Link
                   key={cat.key}
-                  href={localePath(cat.href)}
+                  href={cat.href}
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-dark-500 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
                 >
@@ -447,7 +427,7 @@ export default function Navbar({ locale }: NavbarProps) {
 
             {/* Login Button */}
             <Link
-              href={localePath('/auth/login')}
+              href={'/auth/login'}
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-primary-500 to-primary-600 shadow-md shadow-primary-500/20 transition-all duration-300 active:scale-[0.97]"
             >
