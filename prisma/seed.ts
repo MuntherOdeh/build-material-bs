@@ -195,12 +195,12 @@ async function main() {
   const hashedPassword = await bcrypt.hash('admin123', 12);
   const admin = await prisma.user.create({
     data: {
-      email: 'admin@bunyan.com',
+      email: 'admin@madi.ae',
       password: hashedPassword,
       name: 'Admin',
       nameAr: 'مدير',
       role: 'ADMIN',
-      phone: '+972-50-000-0000',
+      phone: '+971-4-123-4567',
     },
   });
   console.log(`  ✅ Created admin user: ${admin.email}`);

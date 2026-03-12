@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'bunyan-building-materials-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'madi-building-materials-secret-key';
 
 export async function POST(request: NextRequest) {
   try {

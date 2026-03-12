@@ -9,7 +9,7 @@ import { ArrowLeft, ArrowRight, Phone } from 'lucide-react';
 export default function CTABanner() {
   const t = useTranslations();
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   return (

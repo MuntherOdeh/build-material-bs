@@ -120,7 +120,7 @@ const ITEMS_PER_PAGE = 12;
 export default function ProductsPage() {
   const t = useTranslations();
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
   const addItem = useCartStore((s) => s.addItem);
 
   const [searchQuery, setSearchQuery] = useState('');

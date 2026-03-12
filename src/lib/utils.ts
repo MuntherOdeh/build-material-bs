@@ -3,7 +3,8 @@ export function cn(...classes: (string | boolean | undefined | null)[]) {
 }
 
 export function formatPrice(price: number, locale: string = 'ar') {
-  return new Intl.NumberFormat(locale === 'ar' ? 'ar-AE' : 'en-AE', {
+  const intlLocale = locale === 'ar' ? 'ar-AE' : locale === 'ur' ? 'ur-PK' : 'en-AE';
+  return new Intl.NumberFormat(intlLocale, {
     style: 'currency',
     currency: 'AED',
     minimumFractionDigits: 2,
@@ -20,5 +21,5 @@ export function generateOrderNumber(): string {
 }
 
 export function getDirection(locale: string) {
-  return locale === 'ar' ? 'rtl' : 'ltr';
+  return locale === 'ar' || locale === 'ur' ? 'rtl' : 'ltr';
 }

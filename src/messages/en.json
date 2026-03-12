@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "Bunyan",
+    "appName": "Madi",
     "appTagline": "Your #1 Building Materials Store",
     "home": "Home",
     "products": "Products",
@@ -16,6 +16,7 @@
     "language": "Language",
     "arabic": "العربية",
     "english": "English",
+    "urdu": "اردو",
     "currency": "AED",
     "loading": "Loading...",
     "noResults": "No results found",
@@ -23,7 +24,7 @@
     "addToCart": "Add to Cart",
     "buyNow": "Buy Now",
     "contactUs": "Contact Us",
-    "aboutUs": "About Bunyan",
+    "aboutUs": "About Madi",
     "phone": "Phone",
     "email": "Email",
     "address": "Address",
@@ -95,7 +96,7 @@
     "subtitle": "The best products hand-picked for you"
   },
   "whyUs": {
-    "title": "Why Bunyan?",
+    "title": "Why Madi?",
     "subtitle": "We provide a unique shopping experience for building materials",
     "quality": "Guaranteed Quality",
     "qualityDesc": "All our products are original and guaranteed from the best manufacturers",
@@ -209,7 +210,7 @@
     "createAccount": "Create your account now"
   },
   "footer": {
-    "description": "Bunyan is your go-to store for building materials. We provide the best products at the best prices with fast delivery and continuous support.",
+    "description": "Madi is your go-to store for building materials. We provide the best products at the best prices with fast delivery and continuous support.",
     "quickLinks": "Quick Links",
     "customerService": "Customer Service",
     "faq": "FAQ",

@@ -31,7 +31,7 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const t = useTranslations();
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
   const addItem = useCartStore((state) => state.addItem);
 
   const displayName = isRTL ? product.nameAr : product.name;

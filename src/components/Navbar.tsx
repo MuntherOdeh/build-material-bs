@@ -36,7 +36,7 @@ export default function Navbar({ locale }: NavbarProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const categoriesRef = useRef<HTMLDivElement>(null);
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -63,14 +63,15 @@ export default function Navbar({ locale }: NavbarProps) {
   const switchLanguage = (targetLocale: string) => {
     // Remove current locale prefix from pathname
     let path = pathname;
-    if (path.startsWith('/ar')) {
-      path = path.slice(3) || '/';
-    } else if (path.startsWith('/en')) {
-      path = path.slice(3) || '/';
+    for (const loc of ['ar', 'en', 'ur']) {
+      if (path.startsWith(`/${loc}/`) || path === `/${loc}`) {
+        path = path.slice(3) || '/';
+        break;
+      }
     }
 
-    // Build new path
-    const newPath = targetLocale === 'ar' ? path : `/en${path}`;
+    // Build new path - Arabic (default) has no prefix
+    const newPath = targetLocale === 'ar' ? path : `/${targetLocale}${path}`;
 
     startTransition(() => {
       router.replace(newPath);
@@ -135,7 +136,7 @@ export default function Navbar({ locale }: NavbarProps) {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-dark-950 leading-tight tracking-tight group-hover:text-primary-600 transition-colors duration-300">
-                  {isRTL ? 'بنيان' : 'Bunyan'}
+                  {t('appName')}
                 </span>
                 <span className="text-[10px] font-medium text-dark-400 leading-none hidden sm:block">
                   {t('appTagline')}
@@ -249,37 +250,37 @@ export default function Navbar({ locale }: NavbarProps) {
               {/* Language Switcher - Desktop - VISIBLE with text */}
               <div className="hidden sm:flex items-center">
                 <div className="flex items-center bg-dark-50 rounded-xl p-0.5 border border-dark-100">
-                  <button
-                    onClick={() => switchLanguage('ar')}
-                    disabled={isPending}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 ${
-                      locale === 'ar'
-                        ? 'bg-primary-500 text-white shadow-md shadow-primary-500/25'
-                        : 'text-dark-500 hover:text-dark-700'
-                    }`}
-                  >
-                    العربية
-                  </button>
-                  <button
-                    onClick={() => switchLanguage('en')}
-                    disabled={isPending}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 ${
-                      locale === 'en'
-                        ? 'bg-primary-500 text-white shadow-md shadow-primary-500/25'
-                        : 'text-dark-500 hover:text-dark-700'
-                    }`}
-                  >
-                    English
-                  </button>
+                  {[
+                    { code: 'ar', label: 'العربية' },
+                    { code: 'en', label: 'EN' },
+                    { code: 'ur', label: 'اردو' },
+                  ].map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => switchLanguage(lang.code)}
+                      disabled={isPending}
+                      className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 ${
+                        locale === lang.code
+                          ? 'bg-primary-500 text-white shadow-md shadow-primary-500/25'
+                          : 'text-dark-500 hover:text-dark-700'
+                      }`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Language Switcher - Mobile (small globe + label) */}
+              {/* Language Switcher - Mobile (small globe) */}
               <button
-                onClick={() => switchLanguage(locale === 'ar' ? 'en' : 'ar')}
+                onClick={() => {
+                  const localeOrder = ['ar', 'en', 'ur'];
+                  const nextIdx = (localeOrder.indexOf(locale) + 1) % localeOrder.length;
+                  switchLanguage(localeOrder[nextIdx]);
+                }}
                 disabled={isPending}
                 className="sm:hidden w-10 h-10 flex items-center justify-center rounded-xl text-dark-500 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300"
-                aria-label={locale === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
+                aria-label="Switch language"
               >
                 <Languages className="w-[18px] h-[18px]" />
               </button>
@@ -352,7 +353,7 @@ export default function Navbar({ locale }: NavbarProps) {
                 <Building2 className="w-4 h-4 text-white" />
               </div>
               <span className="text-lg font-bold text-dark-950">
-                {isRTL ? 'بنيان' : 'Bunyan'}
+                {t('appName')}
               </span>
             </Link>
             <button
@@ -423,28 +424,24 @@ export default function Navbar({ locale }: NavbarProps) {
             <div className="flex items-center gap-2 px-2">
               <Languages className="w-4 h-4 text-dark-400" />
               <div className="flex-1 flex items-center bg-dark-50 rounded-xl p-0.5 border border-dark-100">
-                <button
-                  onClick={() => switchLanguage('ar')}
-                  disabled={isPending}
-                  className={`flex-1 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                    locale === 'ar'
-                      ? 'bg-primary-500 text-white shadow-md'
-                      : 'text-dark-500 hover:text-dark-700'
-                  }`}
-                >
-                  العربية
-                </button>
-                <button
-                  onClick={() => switchLanguage('en')}
-                  disabled={isPending}
-                  className={`flex-1 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                    locale === 'en'
-                      ? 'bg-primary-500 text-white shadow-md'
-                      : 'text-dark-500 hover:text-dark-700'
-                  }`}
-                >
-                  English
-                </button>
+                {[
+                  { code: 'ar', label: 'العربية' },
+                  { code: 'en', label: 'English' },
+                  { code: 'ur', label: 'اردو' },
+                ].map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => switchLanguage(lang.code)}
+                    disabled={isPending}
+                    className={`flex-1 px-2 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                      locale === lang.code
+                        ? 'bg-primary-500 text-white shadow-md'
+                        : 'text-dark-500 hover:text-dark-700'
+                    }`}
+                  >
+                    {lang.label}
+                  </button>
+                ))}
               </div>
             </div>
 

@@ -10,7 +10,7 @@ import { ArrowLeft, ArrowRight, Truck, Shield, Clock, Package } from 'lucide-rea
 export default function Hero() {
   const t = useTranslations('hero');
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   const stats = [

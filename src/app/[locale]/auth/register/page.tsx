@@ -19,7 +19,7 @@ import {
 export default function RegisterPage() {
   const t = useTranslations();
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

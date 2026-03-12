@@ -95,7 +95,7 @@ const chartData = [35, 58, 42, 70, 55, 80, 65, 45, 72, 60, 85, 50];
 export default function AdminPage() {
   const t = useTranslations();
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
 
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -176,7 +176,7 @@ export default function AdminPage() {
             </div>
             <div>
               <p className="text-sm font-medium">Admin</p>
-              <p className="text-xs text-gray-400">admin@bunyan.com</p>
+              <p className="text-xs text-gray-400">admin@madi.ae</p>
             </div>
           </div>
         </div>
@@ -234,7 +234,7 @@ export default function AdminPage() {
             <div>
               <h1 className="text-2xl font-bold text-gray-900">{t('admin.dashboard')}</h1>
               <p className="text-sm text-gray-500 mt-1">
-                {isRTL ? 'مرحباً بك في لوحة التحكم' : 'Welcome to your dashboard'}
+                {locale === 'ar' ? 'مرحباً بك في لوحة التحكم' : locale === 'ur' ? 'ڈیش بورڈ میں خوش آمدید' : 'Welcome to your dashboard'}
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -307,7 +307,7 @@ export default function AdminPage() {
               <div>
                 <h3 className="font-bold text-gray-900">{t('admin.reports')}</h3>
                 <p className="text-sm text-gray-500 mt-1">
-                  {isRTL ? 'إيرادات آخر 12 شهر' : 'Revenue last 12 months'}
+                  {locale === 'ar' ? 'إيرادات آخر 12 شهر' : locale === 'ur' ? 'آخری 12 ماہ کی آمدنی' : 'Revenue last 12 months'}
                 </p>
               </div>
               <div className="flex items-center gap-2 text-sm text-green-600 font-medium">

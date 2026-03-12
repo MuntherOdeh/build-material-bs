@@ -131,7 +131,7 @@ const categories = [
 
 export default function POSPage() {
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -332,7 +332,7 @@ export default function POSPage() {
                 <Building2 className="w-5 h-5 text-white" />
               </div>
               <span className="font-bold text-lg whitespace-nowrap">
-                {isRTL ? 'بنيان' : 'Bunyan'} <span className="text-blue-400">POS</span>
+                {locale === 'ar' ? 'ماضي' : locale === 'ur' ? 'ماضی' : 'Madi'} <span className="text-blue-400">POS</span>
               </span>
             </div>
 
@@ -763,7 +763,7 @@ export default function POSPage() {
                   <Building2 className="w-6 h-6 text-white" />
                 </div>
               </div>
-              <h3 className="text-xl font-bold">{isRTL ? 'بنيان لمواد البناء' : 'Bunyan Building Materials'}</h3>
+              <h3 className="text-xl font-bold">{locale === 'ar' ? 'ماضي لمواد البناء' : locale === 'ur' ? 'ماضی تعمیراتی سامان' : 'Madi Building Materials'}</h3>
               <p className="text-xs text-gray-500 mt-1">{isRTL ? 'فاتورة ضريبية مبسطة' : 'Simplified Tax Invoice'}</p>
               <div className="flex items-center justify-center gap-2 mt-2 text-xs text-gray-500">
                 <Hash className="w-3 h-3" />
@@ -855,7 +855,7 @@ export default function POSPage() {
             {/* Footer message */}
             <div className="text-center px-6 py-3 border-t border-gray-200">
               <p className="text-xs text-gray-400">
-                {isRTL ? 'شكراً لتعاملكم معنا - بنيان لمواد البناء' : 'Thank you for your business - Bunyan Building Materials'}
+                {locale === 'ar' ? 'شكراً لتعاملكم معنا - ماضي لمواد البناء' : locale === 'ur' ? 'ہمارے ساتھ کاروبار کا شکریہ - ماضی تعمیراتی سامان' : 'Thank you for your business - Madi Building Materials'}
               </p>
             </div>
 

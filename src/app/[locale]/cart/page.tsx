@@ -20,7 +20,7 @@ import {
 export default function CartPage() {
   const t = useTranslations();
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
 
   const items = useCartStore((s) => s.items);
   const removeItem = useCartStore((s) => s.removeItem);
@@ -47,7 +47,7 @@ export default function CartPage() {
   };
 
   const handleApplyDiscount = () => {
-    if (discountCode.toLowerCase() === 'bunyan10') {
+    if (discountCode.toLowerCase() === 'madi10') {
       setDiscountApplied(true);
     }
   };

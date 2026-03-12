@@ -25,8 +25,11 @@ export default function Footer({ locale }: FooterProps) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const isRTL = locale === 'ar';
-  const localePath = (path: string) => `/${locale}${path}`;
+  const isRTL = locale === 'ar' || locale === 'ur';
+  const localePath = (path: string) => {
+    if (locale === 'ar') return path;
+    return `/${locale}${path}`;
+  };
   const currentYear = new Date().getFullYear();
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -90,7 +93,7 @@ export default function Footer({ locale }: FooterProps) {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-white leading-tight">
-                  {isRTL ? 'بنيان' : 'Bunyan'}
+                  {t('appName')}
                 </span>
                 <span className="text-[10px] font-medium text-dark-400 leading-none">
                   {t('appTagline')}
@@ -195,7 +198,7 @@ export default function Footer({ locale }: FooterProps) {
                   <div>
                     <p className="text-xs text-dark-400">{t('phone')}</p>
                     <p className="text-sm text-dark-200" dir="ltr">
-                      +970 599 123 456
+                      +971 4 123 4567
                     </p>
                   </div>
                 </li>
@@ -205,7 +208,7 @@ export default function Footer({ locale }: FooterProps) {
                   </div>
                   <div>
                     <p className="text-xs text-dark-400">{t('email')}</p>
-                    <p className="text-sm text-dark-200">info@bunyan.ps</p>
+                    <p className="text-sm text-dark-200">info@madi.ae</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
@@ -215,9 +218,11 @@ export default function Footer({ locale }: FooterProps) {
                   <div>
                     <p className="text-xs text-dark-400">{t('address')}</p>
                     <p className="text-sm text-dark-200">
-                      {isRTL
-                        ? 'فلسطين، الضفة الغربية'
-                        : 'Palestine, West Bank'}
+                      {locale === 'ar'
+                        ? 'الإمارات العربية المتحدة، دبي'
+                        : locale === 'ur'
+                        ? 'متحدہ عرب امارات، دبئی'
+                        : 'United Arab Emirates, Dubai'}
                     </p>
                   </div>
                 </li>
@@ -252,8 +257,10 @@ export default function Footer({ locale }: FooterProps) {
               </form>
               {subscribed && (
                 <p className="mt-2 text-xs text-emerald-400 animate-in fade-in slide-in-from-bottom-1 duration-300">
-                  {isRTL
+                  {locale === 'ar'
                     ? 'تم الاشتراك بنجاح!'
+                    : locale === 'ur'
+                    ? 'کامیابی سے سبسکرائب ہو گیا!'
                     : 'Successfully subscribed!'}
                 </p>
               )}
@@ -265,14 +272,14 @@ export default function Footer({ locale }: FooterProps) {
         <div className="border-t border-dark-800/60 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-dark-500 text-center sm:text-start">
-              &copy; {currentYear} {isRTL ? 'بنيان' : 'Bunyan'}.{' '}
+              &copy; {currentYear} {t('appName')}.{' '}
               {t('allRightsReserved')}
             </p>
 
             {/* Payment Methods */}
             <div className="flex items-center gap-3">
               <span className="text-xs text-dark-500">
-                {isRTL ? 'طرق الدفع:' : 'Payment:'}
+                {locale === 'ar' ? 'طرق الدفع:' : locale === 'ur' ? 'ادائیگی:' : 'Payment:'}
               </span>
               <div className="flex items-center gap-2">
                 {['Visa', 'MC', 'PayPal', 'Apple'].map((method) => (

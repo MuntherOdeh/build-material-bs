@@ -120,7 +120,7 @@ const featuredProducts = [
 export default function FeaturedProducts() {
   const t = useTranslations();
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   return (

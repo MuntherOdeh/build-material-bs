@@ -17,7 +17,7 @@ import {
 export default function LoginPage() {
   const t = useTranslations();
   const locale = useLocale();
-  const isRTL = locale === 'ar';
+  const isRTL = locale === 'ar' || locale === 'ur';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
